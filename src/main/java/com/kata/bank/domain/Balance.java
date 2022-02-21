@@ -15,12 +15,15 @@ public class Balance {
         return new Balance(value.add(amount.getValue()));
     }
 
+    public Balance subtract(Amount amount) {
+        return new Balance(value.subtract(amount.getValue()));
+    }
+
     private void validateAmount(Amount amount) {
         if(amount != null && amount.getValue().signum() == -1) {
             throw new BankAccountException("negative Amounts cannot be added to Balance!");
         }
     }
-
 
 
     @Override

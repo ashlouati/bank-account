@@ -33,4 +33,16 @@ public class AccountTest {
         assertThrows(BankAccountException.class,
                 () -> account.deposit(new Amount(new BigDecimal(-30))));
     }
+
+    @Test
+    void should_withdraw_amount_of_100_from_account_having_balance_of_1000() {
+        Account account = new Account();
+        account.deposit(new Amount(new BigDecimal(1000)));
+
+        account.withdraw(new Amount(new BigDecimal(100)));
+        Balance expectedBalance = new Balance(new BigDecimal(900));
+
+        assertEquals(expectedBalance, account.getBalance());
+    }
+
 }
