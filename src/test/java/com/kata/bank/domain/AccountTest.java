@@ -15,4 +15,15 @@ public class AccountTest {
 
         assertEquals(expectedBalance, account.getBalance());
     }
+
+    @Test
+    void should_deposit_amount_of_100_be_added_to_balance() {
+        Account account = new Account();
+        account.deposit(new Amount(new BigDecimal(100)));
+        Balance expectedBalance = new Balance(new BigDecimal(100));
+
+        assertEquals(expectedBalance, account.getBalance());
+    }
+
+
 }

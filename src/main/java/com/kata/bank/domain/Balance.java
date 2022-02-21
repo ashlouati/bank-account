@@ -10,6 +10,10 @@ public class Balance {
         this.value = value;
     }
 
+    public Balance add(Amount amount) {
+        return new Balance(value.add(amount.getValue()));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -22,4 +26,5 @@ public class Balance {
     public int hashCode() {
         return Objects.hash(value);
     }
+
 }
