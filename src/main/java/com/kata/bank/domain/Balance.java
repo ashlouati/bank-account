@@ -11,8 +11,17 @@ public class Balance {
     }
 
     public Balance add(Amount amount) {
+        validateAmount(amount);
         return new Balance(value.add(amount.getValue()));
     }
+
+    private void validateAmount(Amount amount) {
+        if(amount != null && amount.getValue().signum() == -1) {
+            throw new BankAccountException("negative Amounts cannot be added to Balance!");
+        }
+    }
+
+
 
     @Override
     public boolean equals(Object o) {

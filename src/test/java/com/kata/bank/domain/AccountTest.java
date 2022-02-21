@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AccountTest {
 
@@ -17,7 +18,7 @@ public class AccountTest {
     }
 
     @Test
-    void should_deposit_amount_of_100_be_added_to_balance() {
+    void should_deposit_amount_of_100_into_account() {
         Account account = new Account();
         account.deposit(new Amount(new BigDecimal(100)));
         Balance expectedBalance = new Balance(new BigDecimal(100));
@@ -25,5 +26,11 @@ public class AccountTest {
         assertEquals(expectedBalance, account.getBalance());
     }
 
+    @Test
+    void should_throw_exception_when_trying_to_deposit_any_negative_amount() {
+        Account account = new Account();
 
+        assertThrows(BankAccountException.class,
+                () -> account.deposit(new Amount(new BigDecimal(-30))));
+    }
 }
