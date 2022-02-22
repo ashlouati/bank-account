@@ -11,6 +11,13 @@ public class StatementLine {
         this.balance = balance;
     }
 
+    public Operation getOperation() {
+        return operation;
+    }
+
+    public Balance getBalance() {
+        return balance;
+    }
 
     @Override
     public boolean equals(Object o) {

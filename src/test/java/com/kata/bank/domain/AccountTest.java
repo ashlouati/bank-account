@@ -92,4 +92,13 @@ public class AccountTest {
         assertTrue(printer.getStatementLines().contains(expectedOperation));
     }
 
+    @Test
+    void should_print_nothing_when_no_op_done() {
+        Account account = new Account(fixedClock);
+        FakePrinter printer = new FakePrinter();
+        account.print(printer);
+
+        assertEquals(printer.getStatementLines().size(), 0);
+    }
+
 }
