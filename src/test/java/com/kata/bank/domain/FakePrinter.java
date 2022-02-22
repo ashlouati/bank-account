@@ -5,14 +5,14 @@ import java.util.List;
 
 public class FakePrinter implements Printer {
 
-    private final List<Operation> operations = new ArrayList<>();
+    private final List<StatementLine> statementLines = new ArrayList<>();
 
     @Override
     public void print(Statement statement) {
-        operations.addAll(statement.getOperations());
+        statementLines.addAll(statement.getStatementLines());
     }
 
-    public List<Operation> getOperations() {
-        return operations;
+    public List<StatementLine> getStatementLines() {
+        return statementLines;
     }
 }

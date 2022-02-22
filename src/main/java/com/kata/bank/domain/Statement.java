@@ -5,13 +5,13 @@ import java.util.List;
 
 public class Statement {
 
-    private final List<Operation> operations = new ArrayList<>();
+    private final List<StatementLine> statementLines = new ArrayList<>();
 
-    public void add(Operation operation) {
-        operations.add(operation);
+    public void add(Operation operation, Balance balance) {
+        statementLines.add(new StatementLine(operation, balance));
     }
 
-    public List<Operation> getOperations() {
-        return operations;
+    public List<StatementLine> getStatementLines() {
+        return statementLines;
     }
 }

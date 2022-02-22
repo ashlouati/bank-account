@@ -64,13 +64,15 @@ public class AccountTest {
         account.deposit(new Amount(new BigDecimal(340)));
         FakePrinter printer = new FakePrinter();
         account.print(printer);
-        Operation expectedOperation = new Operation(
-                OperationType.DEPOSIT,
-                new Amount(new BigDecimal(340)),
-                new Balance(new BigDecimal(340)),
-                LocalDateTime.now(fixedClock));
+        StatementLine expectedOperation = new StatementLine(
+                new Operation(OperationType.DEPOSIT,
+                        new Amount(new BigDecimal(340)),
+                        LocalDateTime.now(fixedClock)),
+                new Balance(new BigDecimal(340))
+        );
 
-        assertTrue(printer.getOperations().contains(expectedOperation));
+
+        assertTrue(printer.getStatementLines().contains(expectedOperation));
     }
 
     @Test
@@ -80,13 +82,14 @@ public class AccountTest {
         account.withdraw(new Amount(new BigDecimal(240)));
         FakePrinter printer = new FakePrinter();
         account.print(printer);
-        Operation expectedOperation = new Operation(
-                OperationType.WITHDRAWAL,
-                new Amount(new BigDecimal(240)),
-                new Balance(new BigDecimal(100)),
-                LocalDateTime.now(fixedClock));
+        StatementLine expectedOperation = new StatementLine(
+                new Operation(OperationType.WITHDRAWAL,
+                        new Amount(new BigDecimal(240)),
+                        LocalDateTime.now(fixedClock)),
+                new Balance(new BigDecimal(100))
+        );
 
-        assertTrue(printer.getOperations().contains(expectedOperation));
+        assertTrue(printer.getStatementLines().contains(expectedOperation));
     }
 
 }
