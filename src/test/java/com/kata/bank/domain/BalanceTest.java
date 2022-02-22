@@ -27,4 +27,24 @@ public class BalanceTest {
         assertThrows(BankAccountException.class,
                 () -> balance.add(new Amount(new BigDecimal(-20))));
     }
+
+    @Test
+    void should_subtract_amount_20_from_balance_of_100() {
+        Balance balance = new Balance(new BigDecimal(100));
+        Balance newBalance = balance.subtract(new Amount(new BigDecimal(20)));
+
+        Balance expectedBalance = new Balance(new BigDecimal(80));
+
+        assertEquals(expectedBalance, newBalance);
+    }
+
+    @Test
+    void should_throw_exception_trying_to_subtract_amount_greater_than_balance() {
+        Balance balance = new Balance(new BigDecimal(20));
+
+        assertThrows(BankAccountException.class,
+                () -> balance.subtract(new Amount(new BigDecimal(100))));
+    }
+
+
 }

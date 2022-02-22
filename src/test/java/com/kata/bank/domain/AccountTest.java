@@ -45,4 +45,12 @@ public class AccountTest {
         assertEquals(expectedBalance, account.getBalance());
     }
 
+    @Test
+    void should_throw_exception_when_withdrawal_amount_exceeds_balance() {
+        Account account = new Account();
+
+        assertThrows(BankAccountException.class,
+                () -> account.withdraw(new Amount(new BigDecimal(100))));
+    }
+
 }

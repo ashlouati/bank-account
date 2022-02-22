@@ -16,12 +16,20 @@ public class Balance {
     }
 
     public Balance subtract(Amount amount) {
+        validateAmount(amount);
+        validateBalance(amount);
         return new Balance(value.subtract(amount.getValue()));
     }
 
     private void validateAmount(Amount amount) {
         if(amount != null && amount.getValue().signum() == -1) {
             throw new BankAccountException("negative Amounts cannot be added to Balance!");
+        }
+    }
+
+    private void validateBalance(Amount amount) {
+        if(value.compareTo(amount.getValue()) < 0) {
+            throw new BankAccountException("the Amount to subtract exceeds the Balance");
         }
     }
 
