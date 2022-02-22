@@ -30,6 +30,7 @@ public class Account {
 
     public void withdraw(Amount amount) {
         balance = balance.subtract(amount);
+        statement.add(new Operation(OperationType.WITHDRAWAL, amount, balance, LocalDateTime.now(clock)));
     }
 
     public void print(Printer printer) {

@@ -69,6 +69,23 @@ public class AccountTest {
                 new Amount(new BigDecimal(340)),
                 new Balance(new BigDecimal(340)),
                 LocalDateTime.now(fixedClock));
+
+        assertTrue(printer.getOperations().contains(expectedOperation));
+    }
+
+    @Test
+    void should_print_withdrawal_operation() {
+        Account account = new Account(fixedClock);
+        account.deposit(new Amount(new BigDecimal(340)));
+        account.withdraw(new Amount(new BigDecimal(240)));
+        FakePrinter printer = new FakePrinter();
+        account.print(printer);
+        Operation expectedOperation = new Operation(
+                OperationType.WITHDRAWAL,
+                new Amount(new BigDecimal(240)),
+                new Balance(new BigDecimal(100)),
+                LocalDateTime.now(fixedClock));
+
         assertTrue(printer.getOperations().contains(expectedOperation));
     }
 
