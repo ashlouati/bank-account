@@ -3,11 +3,16 @@ package com.kata.bank.domain;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AccountTest {
+
+    private final Clock fixedClock = Clock.fixed(Instant.now(), ZoneId.systemDefault());
 
     @Test
     void should_create_account_initiated_with_zero_balance() {
@@ -51,6 +56,20 @@ public class AccountTest {
 
         assertThrows(BankAccountException.class,
                 () -> account.withdraw(new Amount(new BigDecimal(100))));
+    }
+
+    @Test
+    void should_print_deposit_operation() {
+        Account account = new Account(fixedClock);
+        account.deposit(new Amount(new BigDecimal(340)));
+        FakePrinter printer = new FakePrinter();
+        account.print(printer);
+        Operation expectedOperation = new Operation(
+                OperationType.DEPOSIT,
+                new Amount(new BigDecimal(340)),
+                new Balance(new BigDecimal(340)),
+                LocalDateTime.now(fixedClock));
+        assertTrue(printer.getOperations().contains(expectedOperation));
     }
 
 }
