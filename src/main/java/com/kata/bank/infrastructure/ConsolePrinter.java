@@ -8,14 +8,14 @@ import java.time.format.DateTimeFormatter;
 public class ConsolePrinter implements Printer {
 
     DateTimeFormatter frenchDateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-    private static final String HEADER = "| OPERATION | DATE | AMOUNT | BALANCE\n";
+    private static final String HEADER = "| OPERATION | DATE | AMOUNT | BALANCE |\n";
 
     @Override
     public void print(Statement statement) {
         StringBuilder printedLines = new StringBuilder(HEADER);
         statement.getStatementLines()
                 .forEach(statementLine -> printedLines.append(
-                        String.format("| %s | %s | %s | %s\n",
+                        String.format("| %s | %s | %s | %s |\n",
                                 statementLine.getOperation().getOperationType(),
                                 statementLine.getOperation().getTimestamp().format(frenchDateTimeFormatter),
                                 statementLine.getOperation().getAmount(),

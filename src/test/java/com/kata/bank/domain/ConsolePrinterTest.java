@@ -20,7 +20,7 @@ public class ConsolePrinterTest {
 
     private final Clock fixedClock = Clock.fixed(Instant.now(), ZoneId.systemDefault());
     DateTimeFormatter frenchDateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-    private static final String HEADER = "| OPERATION | DATE | AMOUNT | BALANCE\n";
+    private static final String HEADER = "| OPERATION | DATE | AMOUNT | BALANCE |\n";
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -42,7 +42,7 @@ public class ConsolePrinterTest {
         account.print(new ConsolePrinter());
         String formattedDateTime = LocalDateTime.now(fixedClock).format(frenchDateTimeFormatter);
         String expectedOutput = HEADER +
-                "| DEPOSIT | " + formattedDateTime + " | 3000 | 3000";
+                "| DEPOSIT | " + formattedDateTime + " | 3000 | 3000 |";
 
         assertEquals(expectedOutput, outContent.toString().trim());
     }
