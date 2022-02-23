@@ -39,10 +39,23 @@ public class AccountStepDefs {
         }
     }
 
+    @When("I withdraw an amount of {double}")
+    public void iWithdrawAnAmountOf(double amount) {
+        try {
+            account.withdraw(new Amount(new BigDecimal(amount)));
+        } catch (BankAccountException exception) {
+            caughtExceptions.add(exception);
+        }
+    }
+
     @Then("The deposit should be rejected")
     public void theDepositShouldBeRejected() {
         assertFalse(caughtExceptions.isEmpty());
     }
 
 
+    @Then("The withdrawal should be rejected")
+    public void theWithdrawalShouldBeRejected() {
+        assertFalse(caughtExceptions.isEmpty());
+    }
 }
