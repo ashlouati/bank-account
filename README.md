@@ -21,3 +21,8 @@ Think of your personal bank account experience When in doubt, go for the simples
 **In order to** check my operations  
 **As a** bank client  
 **I want to** see the history (operation, date, amount, balance)  of my operations  
+
+##### US 4:
+**In order to** have a clear view of my account  
+**As a** bank client  
+**I want to** print my account statement
